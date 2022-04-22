@@ -1,0 +1,16 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: cola_aqui_db_admin
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - cola_aqui_mysql_data:/var/lib/mysql
+
+volumes:
+  cola_aqui_mysql_data:
