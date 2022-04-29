@@ -1,6 +1,5 @@
 FROM ruby:3.1.1
-RUN apt-get update -qq && apt-get install -y --no-install-recommends build-essential apt-utils
-RUN mkdir /api
+RUN apt-get update -qq && apt-get install -y --no-install-recommends build-essential apt-utils && mkdir /api
 WORKDIR /api
 COPY Gemfile /api/Gemfile
 COPY Gemfile.lock /api/Gemfile.lock
