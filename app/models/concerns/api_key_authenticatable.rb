@@ -24,7 +24,7 @@ module ApiKeyAuthenticatable
   attr_writer :current_bearer
 
   def authenticator(http_token, options)
-    @current_api_key = ApiKey.find_by token: http_token
+    @current_api_key = ApiKey.authenticate_by_token http_token
 
     current_api_key&.bearer
   end
