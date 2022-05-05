@@ -25,6 +25,7 @@ services:
       DB_USER: root
       DB_PASSWORD: password
       DB_HOST: cola_aqui_mysql
+      API_KEY_HMAC_SECRET_KEY: 2e0d0c3fa6ce87007a291ed674d75646091a025931e5ecde8086751f1ccd1837
 
 volumes:
   cola_aqui_mysql_data:
