@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_143753) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_09_003645) do
+  create_table "api_clients", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "token", null: false
+    t.boolean "domain_service", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_api_clients_on_name", unique: true
+    t.index ["token"], name: "index_api_clients_on_token", unique: true
+  end
+
   create_table "api_keys", charset: "utf8mb4", force: :cascade do |t|
     t.integer "bearer_id", null: false
     t.string "bearer_type", null: false
