@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_143753) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_011030) do
+  create_table "api_clients", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "token", null: false
+    t.boolean "domain_service", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_api_clients_on_name", unique: true
+    t.index ["token"], name: "index_api_clients_on_token", unique: true
+  end
+
   create_table "api_keys", charset: "utf8mb4", force: :cascade do |t|
     t.integer "bearer_id", null: false
     t.string "bearer_type", null: false
@@ -21,11 +31,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_143753) do
     t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
   end
 
+  create_table "partyers", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "gender"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "birth_date"
+    t.index ["user_id"], name: "index_partyers_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_type"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  errors:
+    messages:
+      email_does_not_match_confirmation: "Email and email confirmation should be equal"
+      password_does_not_match_confirmation: "Password and password confirmation should be equal"
