@@ -6,9 +6,9 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
 
-  validate :allowed_user_type?
+  before_validation :allowed_user_type
 
-  def allowed_user_type?
+  def allowed_user_type
     user_type = self.user_type
 
     if user_type?
@@ -18,5 +18,9 @@ class User < ApplicationRecord
         errors.add(:user_type, 'Não permitido')
       end
     end
+  end
+
+  def set_user_type(user_type)
+    self.user_type = user_type
   end
 end

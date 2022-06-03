@@ -5,9 +5,9 @@ class Partyer < ApplicationRecord
   validates :name, presence: true
   validates :birth_date, presence: true
 
-  validate :user_adult_age?
+  before_validation :partyer_is_adult
 
-  def user_adult_age?
-    errors.add(:user, 'deve ser maior de idade') if self.birth_date >= 18.years.ago
+  def partyer_is_adult
+    errors.add(:partyer, 'deve ser maior de idade') if self.birth_date >= 18.years.ago
   end
 end
