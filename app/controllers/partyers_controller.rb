@@ -1,4 +1,6 @@
 class PartyersController < ApplicationController
+  prepend_before_action :authenticate_with_api_key!, only: %i[index]
+
   def index
     @partyers = Partyer.all
     render json: @partyers, status: :ok
@@ -8,13 +10,14 @@ class PartyersController < ApplicationController
     # TODO: Use params.require(:model).permit(:attr) => Discovery how to work with relationship
 
     User.transaction do
-      user = User.create email: params[:email].downcase, password: params[:password], user_type: params[:user_type]
-      @partyer = Partyer.create name: params[:name], gender: params[:gender], birth_date: params[:birth_date], user: user
-
+      user = User.create email: params[:email].downcase, password: params[:password]
+      user.set_user_type 'partyer'
       user.save!
-      @partyer.save!
 
-      render json: @partyer, status: :created
+      partyer = Partyer.create name: params[:name], gender: params[:gender], birth_date: params[:birth_date], user: user
+      partyer.save!
+
+      render json: partyer, status: :created
     end
   end
 end
