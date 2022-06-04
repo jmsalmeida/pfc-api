@@ -8,10 +8,9 @@ class PartyersController < ApplicationController
 
   def create
     # TODO: Use params.require(:model).permit(:attr) => Discovery how to work with relationship
-
     User.transaction do
-      user = User.create email: params[:email].downcase, password: params[:password]
-      user.set_user_type 'partyer'
+      user = User.create email: params[:email], password: params[:password]
+      user.user_type = 'partyer'
       user.save!
 
       partyer = Partyer.create name: params[:name], gender: params[:gender], birth_date: params[:birth_date], user: user

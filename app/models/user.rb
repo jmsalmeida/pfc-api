@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
 
+  before_save :downcase_email
   before_validation :allowed_user_type
 
   def allowed_user_type
@@ -20,7 +21,8 @@ class User < ApplicationRecord
     end
   end
 
-  def set_user_type(user_type)
-    self.user_type = user_type
+  private
+  def downcase_email
+    self.email = self.email.downcase
   end
 end
