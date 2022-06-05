@@ -18,8 +18,7 @@ class ApiKeysController < ApplicationController
         render json: api_key, status: :created and return
       end
     end
-
-    render status: :unauthorized
+    render json: {}, status: :unauthorized
   end
 
   def destroy

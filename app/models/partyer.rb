@@ -8,6 +8,8 @@ class Partyer < ApplicationRecord
   before_validation :partyer_is_adult
 
   def partyer_is_adult
-    errors.add(:partyer, 'deve ser maior de idade') if self.birth_date >= 18.years.ago
+    if self.birth_date
+      errors.add(:partyer, 'deve ser maior de idade') if self.birth_date >= 18.years.ago
+    end
   end
 end
