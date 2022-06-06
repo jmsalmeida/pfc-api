@@ -19,6 +19,6 @@ class PartyersController < ApplicationController
       render json: partyer, status: :created
     end
   rescue ActiveRecord::RecordInvalid => invalid
-    render json: invalid.record.errors.full_messages, status: :unprocessable_entity
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 end
