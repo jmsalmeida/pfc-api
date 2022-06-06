@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_23_011030) do
-  create_table "api_clients", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "token", null: false
-    t.boolean "domain_service", null: false
+ActiveRecord::Schema[7.0].define(version: 2022_06_05_235521) do
+  create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "place_number"
+    t.string "postal_code"
+    t.string "district"
+    t.bigint "party_place_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_api_clients_on_name", unique: true
-    t.index ["token"], name: "index_api_clients_on_token", unique: true
+    t.index ["party_place_id"], name: "index_addresses_on_party_place_id"
   end
 
   create_table "api_keys", charset: "utf8mb4", force: :cascade do |t|
@@ -31,23 +33,37 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_23_011030) do
     t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
   end
 
-  create_table "partyers", charset: "utf8mb4", force: :cascade do |t|
+  create_table "party_places", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.string "gender"
+    t.string "cnpj"
+    t.string "main_contact"
+    t.string "phone"
+    t.string "cellphone"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cnpj"], name: "index_party_places_on_cnpj", unique: true
+    t.index ["user_id"], name: "index_party_places_on_user_id"
+  end
+
+  create_table "partyers", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "gender"
     t.date "birth_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_partyers_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.string "user_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user_type"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "addresses", "party_places"
 end
