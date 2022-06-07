@@ -2,8 +2,21 @@ class PartyPlacesController < ApplicationController
   prepend_before_action :authenticate_with_api_key!, only: %i[index]
 
   def index
-    @party_places = PartyPlace.all
-    render json: @party_places, status: :ok
+    party_places = nil
+
+    if params.has_key?(:party_place_name)
+      name = params[:party_place_name]
+      party_places = PartyPlace.where(name: name)
+
+      if party_places.empty?
+        render json: { errors: 'Estabelecimento não encontrado' }, status: :not_found
+      else
+        render json: party_places, status: :ok
+      end
+    else
+      party_places = PartyPlace.all
+      render json: party_places, status: :ok
+    end
   end
 
   def create
@@ -24,5 +37,10 @@ class PartyPlacesController < ApplicationController
     end
   rescue ActiveRecord::RecordInvalid => invalid
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def show
+    party_place = PartyPlace.find(params[:id])
+    render json: party_place, status: :ok
   end
 end
