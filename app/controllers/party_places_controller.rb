@@ -38,4 +38,9 @@ class PartyPlacesController < ApplicationController
   rescue ActiveRecord::RecordInvalid => invalid
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
+
+  def show
+    party_place = PartyPlace.find(params[:id])
+    render json: party_place, status: :ok
+  end
 end
