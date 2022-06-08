@@ -1,5 +1,5 @@
 class PartyPlacesController < ApplicationController
-  prepend_before_action :authenticate_with_api_key!, only: %i[index]
+  prepend_before_action :authenticate_with_api_key!, only: %i[index show]
 
   def index
     party_places = nil
