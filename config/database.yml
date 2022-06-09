@@ -51,6 +51,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: cola_aqui_api_production
   username: cola_aqui_api
   password: <%= ENV["COLA_AQUI_API_DATABASE_PASSWORD"] %>
