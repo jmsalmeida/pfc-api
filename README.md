@@ -25,3 +25,12 @@ docker exec -it <container_ref> rails db:create
 ```docker
 docker exec -it <container_ref> rails db:migrate RAILS_ENV=development
 ```
+
+#### Configuration for developers
+
+- Install ruby (recommend to use a ruby version manager like [RVM](https://rvm.io/rvm/install))
+- Inside Rails project run the command below to install the project gems
+
+```bash
+bundle install
+```
