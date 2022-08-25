@@ -4,8 +4,7 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
