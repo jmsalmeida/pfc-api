@@ -1,10 +1,11 @@
 class User < ApplicationRecord
   has_many :api_keys, as: :bearer
+  has_many :sessions, dependent: :destroy
 
   has_secure_password
   validates :user_type, presence: true
   validates :email, presence: true
-  validates :email, uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: { case_sensitive: false }, format: { with: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/, message: I18n.t("errors.models.user.format_email") }
 
   before_save :downcase_email
   before_validation :allowed_user_type

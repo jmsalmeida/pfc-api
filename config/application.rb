@@ -20,7 +20,7 @@ module ColaAquiApi
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("lib")
 
     # This also configures session_options for use below
     config.session_store :cookie_store, key: '_interslice_session'

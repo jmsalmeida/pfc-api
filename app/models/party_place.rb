@@ -5,7 +5,7 @@ class PartyPlace < ApplicationRecord
   has_one :address
 
   validates :name, presence: true
-  validates :cnpj, presence: true
+  validates :cnpj, presence: true, uniqueness: true
   validates :main_contact, presence: true
   validates :cellphone, presence: true
 

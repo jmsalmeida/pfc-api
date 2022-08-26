@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_05_235521) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_231939) do
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "street"
     t.string "city"
@@ -56,6 +56,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_235521) do
     t.index ["user_id"], name: "index_partyers_on_user_id"
   end
 
+  create_table "sessions", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "last_used_at"
+    t.boolean "status", default: true
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "session_id"
+    t.index ["last_used_at"], name: "index_sessions_on_last_used_at"
+    t.index ["session_id"], name: "index_session_id"
+    t.index ["status"], name: "index_sessions_on_status"
+    t.index ["token"], name: "index_sessions_on_token", unique: true
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -66,4 +81,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_235521) do
   end
 
   add_foreign_key "addresses", "party_places"
+  add_foreign_key "sessions", "users"
 end

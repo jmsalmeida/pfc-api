@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
-  include ApiKeyAuthenticatable
-
+  include AuthenticateRequest
+  before_action :current_user
   before_action :underscore_params!
 
   private
