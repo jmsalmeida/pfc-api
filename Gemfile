@@ -48,6 +48,12 @@ gem "rack-cors"
 # Validate cnpj
 gem "cpf_cnpj"
 
+# Simple, Heroku-friendly Rails app configuration using ENV and a single YAML file
+gem 'figaro', '~> 1.2'
+
+# A pure ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard
+gem 'jwt', '~> 2.5'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

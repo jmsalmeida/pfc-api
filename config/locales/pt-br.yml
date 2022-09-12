@@ -1,0 +1,13 @@
+pt-br:
+  errors:
+    models:
+      user:
+        format_email: 'não tem o formato esperado.'
+    controllers:
+      auth:
+        unauthenticated: 'Usuário não autenticado.'
+        session_finished: 'Sessão do usuário finalizada.'
+        user_destroyed: 'Usuário deletado com sucesso.'
+        token_not_created: 'Erro inesperado na criação do token.'
+        invalid_credentials: 'Email e/ou senha incorretos.'
+        insufficient_params: 'Parametros faltando. Você passar email e senha para fazer o login.'
