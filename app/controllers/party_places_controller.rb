@@ -15,7 +15,7 @@ class PartyPlacesController < ApplicationController
       end
     else
       party_places = PartyPlace.all
-      render json: party_places, status: :ok
+      paginate json: party_places
     end
   end
 
