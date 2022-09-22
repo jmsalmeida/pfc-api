@@ -3,6 +3,7 @@ class PartyPlace < ApplicationRecord
 
   belongs_to :user
   has_one :address
+  has_one :party_feature
 
   validates :name, presence: true
   validates :cnpj, presence: true, uniqueness: true

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :party_places, path: 'party-places', only: %i[index show]
+  resources :party_features, path: 'party-features', only: %i[update show]
 
   namespace :auth do
     post "signin", to: "sessions#create"
