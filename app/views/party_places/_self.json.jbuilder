@@ -1,0 +1,1 @@
+json.extract! party_place, :id, :name, :cnpj, :main_contact, :cellphone
