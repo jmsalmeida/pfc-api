@@ -12,6 +12,10 @@ class Auth::RegisterPartyPlacesController < Auth::RegistrationsController
       @address.party_place = @party_place
       @address.save!
 
+      @party_features = PartyFeature.create
+      @party_features.party_place = @party_place
+      @party_features.save!
+
       success_user_created
     end
   rescue ActiveRecord::RecordInvalid => invalid
