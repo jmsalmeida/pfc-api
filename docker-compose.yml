@@ -1,9 +1,10 @@
-version: '3.5'
+version: '3.9'
 services:
   cola_aqui_mysql:
-    image: mysql:5.7
+    image: mysql:8
     restart: always
     environment:
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
