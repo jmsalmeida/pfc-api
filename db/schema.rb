@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
-  create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_014129) do
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "street"
     t.string "city"
     t.string "place_number"
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["party_place_id"], name: "index_addresses_on_party_place_id"
   end
 
-  create_table "api_keys", charset: "utf8mb4", force: :cascade do |t|
+  create_table "api_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "bearer_id", null: false
     t.string "bearer_type", null: false
     t.string "token_digest", null: false
@@ -33,17 +33,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
   end
 
-  create_table "party_features", charset: "utf8mb4", force: :cascade do |t|
-    t.boolean "smoke_place"
-    t.boolean "available_tables"
+  create_table "party_features", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.boolean "smoke_place", default: false
+    t.boolean "available_tables", default: false
     t.bigint "party_place_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed", default: false
     t.index ["party_place_id"], name: "index_party_features_on_party_place_id"
   end
 
-  create_table "party_places", charset: "utf8mb4", force: :cascade do |t|
+  create_table "party_places", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "cnpj"
     t.string "main_contact"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["user_id"], name: "index_party_places_on_user_id"
   end
 
-  create_table "partyers", charset: "utf8mb4", force: :cascade do |t|
+  create_table "partyers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "gender"
     t.date "birth_date"
@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["user_id"], name: "index_partyers_on_user_id"
   end
 
-  create_table "sessions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "last_used_at"
     t.boolean "status", default: true
@@ -81,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
+  create_table "taggings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -104,15 +104,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_021027) do
     t.index ["tenant"], name: "index_taggings_on_tenant"
   end
 
-  create_table "tags", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", collation: "utf8_bin"
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", collation: "utf8mb3_bin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "user_type", null: false
