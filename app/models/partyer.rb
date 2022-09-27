@@ -1,5 +1,6 @@
 class Partyer < ApplicationRecord
   belongs_to :user
+  has_many :checkins
 
   validates :gender, presence: true
   validates :name, presence: true

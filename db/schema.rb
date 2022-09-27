@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_23_014129) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_25_153140) do
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "street"
     t.string "city"
@@ -31,6 +31,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_23_014129) do
     t.datetime "updated_at", null: false
     t.index ["bearer_id", "bearer_type"], name: "index_api_keys_on_bearer_id_and_bearer_type"
     t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
+  end
+
+  create_table "checkins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "partyer_id"
+    t.bigint "party_place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_place_id"], name: "index_checkins_on_party_place_id"
+    t.index ["partyer_id"], name: "index_checkins_on_partyer_id"
   end
 
   create_table "party_features", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -61,8 +70,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_23_014129) do
     t.string "gender"
     t.date "birth_date"
     t.bigint "user_id"
+    t.bigint "checkins_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["checkins_id"], name: "index_partyers_on_checkins_id"
     t.index ["user_id"], name: "index_partyers_on_user_id"
   end
 
