@@ -8,4 +8,5 @@ else
   json.partial! "party_places/self", party_place: @party_places
   json.address @party_places.address
   json.party_features @party_places.party_feature
+  json.checkins @party_places.checkins
 end

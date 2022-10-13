@@ -5,6 +5,8 @@ class PartyPlace < ApplicationRecord
   has_one :address
   has_one :party_feature
 
+  has_many :checkins, dependent: :destroy
+
   validates :name, presence: true
   validates :cnpj, presence: true, uniqueness: true
   validates :main_contact, presence: true
