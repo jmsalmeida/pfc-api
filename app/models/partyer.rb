@@ -10,7 +10,7 @@ class Partyer < ApplicationRecord
 
   def partyer_is_adult
     if self.birth_date
-      errors.add(:partyer, 'deve ser maior de idade') if self.birth_date >= 18.years.ago
+      errors.add(:partyer, 'must be an adult') if self.birth_date >= 18.years.ago
     end
   end
 end

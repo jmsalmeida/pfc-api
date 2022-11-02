@@ -6,8 +6,8 @@ json.user do
     if @user.user_type == 'party_place'
       json.party_place do
         json.partial! "party_places/self", party_place: @party_place
-        json.address @address
-        json.features_is_completed @party_features.completed
+        json.address @party_place.address
+        json.features_is_completed @party_place.party_feature.completed
       end
     else
       json.partyer @partyer

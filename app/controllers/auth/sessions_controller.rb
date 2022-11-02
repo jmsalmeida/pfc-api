@@ -11,6 +11,11 @@ class Auth::SessionsController < ApplicationController
         @token = jwt_session_create @user.id
         if @token
           @token = "Bearer #{@token}"
+
+          if @user.user_type == 'party_place'
+            @party_place = PartyPlace.find_by user_id: @user.id
+          end
+
           return success_session_created
         else
           return error_token_create
