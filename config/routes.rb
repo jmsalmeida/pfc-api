@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     post 'signup/partyer', to: 'register_partyers#create'
     post 'signup/party-place', to: 'register_party_places#create'
     delete 'destroy', to: 'registrations#destroy'
+
+    post 'email-confirmation', to: 'auth_actions#confirm_email'
+    post 'resend-email-confirmation', to: 'auth_actions#resend_email'
   end
 
   namespace :checkin do

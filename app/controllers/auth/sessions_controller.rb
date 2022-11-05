@@ -2,12 +2,17 @@ class Auth::SessionsController < ApplicationController
   include CreateSession
 
   before_action :authenticate_user, only: [:destroy]
-  
+
   def create
     return error_insufficient_params unless params[:email].present? && params[:password].present?
     @user = User.find_by(email: params[:email])
+
     if @user
       if @user.authenticate(params[:password])
+        unless @user.email_confirmed
+          return unconfirmed_email
+        end
+
         @token = jwt_session_create @user.id
         if @token
           @token = "Bearer #{@token}"
@@ -53,5 +58,9 @@ class Auth::SessionsController < ApplicationController
 
   def error_insufficient_params
     render status: :unprocessable_entity, json: {errors: [I18n.t('errors.controllers.auth.insufficient_params')]}
+  end
+
+  def unconfirmed_email
+    render status: :created, template: "auth/unconfirmed_user"
   end
 end
