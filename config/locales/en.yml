@@ -12,3 +12,5 @@ en:
         insufficient_params: 'Missing params to authenticate user. You should pass email and password.'
         unconfirmed_email: 'User email is not confirmed.'
         invalid_confirmation_token: 'Invalid token! Try again or resend the email confirmation'
+      party_places:
+        not_found: 'Party place not found'
