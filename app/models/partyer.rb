@@ -13,4 +13,8 @@ class Partyer < ApplicationRecord
       errors.add(:partyer, 'must be an adult') if self.birth_date >= 18.years.ago
     end
   end
+
+  def delete_associated_data
+    self.user.destroy! if self.user
+  end
 end

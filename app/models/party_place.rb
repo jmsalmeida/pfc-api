@@ -14,6 +14,12 @@ class PartyPlace < ApplicationRecord
 
   before_validation :validate_cnpj
 
+  def delete_associated_data
+    self.user.destroy! if self.user
+    self.address.destroy! if self.address
+    self.party_feature.destroy! if self.party_feature
+  end
+
   private
   def validate_cnpj
     if self.cnpj?
