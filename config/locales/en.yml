@@ -11,3 +11,5 @@ en:
         token_not_created: 'Unexpected error token was not created.'
         invalid_credentials: 'Email and/or password does not match.'
         insufficient_params: 'Missing params to authenticate user. You should pass email and password.'
+        unconfirmed_email: 'User email is not confirmed.'
+        invalid_confirmation_token: 'Invalid token! Try again or resend the email confirmation'

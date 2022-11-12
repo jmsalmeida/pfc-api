@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }, format: { with: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/, message: I18n.t("errors.models.user.format_email") }
 
   before_save :downcase_email
+  before_create :generate_confirmation_token
   before_validation :allowed_user_type
 
   def allowed_user_type
@@ -20,6 +21,16 @@ class User < ApplicationRecord
         errors.add(:user_type, 'Não permitido')
       end
     end
+  end
+
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save! validate: false
+  end
+
+  def generate_confirmation_token
+    self.confirm_token = SecureRandom.random_number(999999)
   end
 
   private

@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      .text {
+        font-size: 16px;
+      }
+
+      .code-value {
+        font-size: 2em;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Obrigado por se cadastrar no Cola Aqui!</h3>
+
+    <p class="text">Ficamos muito felizes com você por aqui. Para concluirmos o seu cadastro, copie o código abaixo e insira-o no aplicativo conforme solicitado.</p>
+
+    <p class="code-value"><%= @user.confirm_token%></p>
+    <p>Esse é um e-mail gerado automaticamente, por favor não responda</p>
+  </body>
+</html>
