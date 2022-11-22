@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_many :api_keys, as: :bearer
   has_many :sessions, dependent: :destroy
 
   has_secure_password
