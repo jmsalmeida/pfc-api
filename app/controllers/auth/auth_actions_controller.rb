@@ -16,10 +16,17 @@ class Auth::AuthActionsController < ApplicationController
 
     if @user
       @user.email_activate
-      @token = "Bearer #{jwt_session_create @user.id}"
-      user_confirmed_response = { user: @user, Authorization: @token }
 
-      render json: user_confirmed_response, status: :ok
+      if @user.user_type == 'party_place'
+        @party_place = PartyPlace.find_by user_id: @user.id
+      else
+        @partyer = Partyer.find_by user_id: @user.id
+      end
+
+      @token = "Bearer #{jwt_session_create @user.id}"
+
+      response.headers['Authorization'] = @token
+      render status: :created, template: "auth/auth"
     else
       render json: { errors: [I18n.t('errors.controllers.auth.invalid_confirmation_token')] }, status: :unauthorized
     end

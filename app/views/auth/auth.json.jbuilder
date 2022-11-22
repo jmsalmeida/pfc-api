@@ -1,4 +1,6 @@
-json.Authorization @token
+if @token
+  json.Authorization @token
+end
 
 json.user do
   json.partial! "users/self", user: @user

@@ -9,6 +9,12 @@ class Auth::SessionsController < ApplicationController
 
     if @user
       if @user.authenticate(params[:password])
+        if @user.user_type == 'party_place'
+          @party_place = PartyPlace.find_by user_id: @user.id
+        else
+          @partyer = Partyer.find_by user_id: @user.id
+        end
+
         unless @user.email_confirmed
           return unconfirmed_email
         end
@@ -16,10 +22,6 @@ class Auth::SessionsController < ApplicationController
         @token = jwt_session_create @user.id
         if @token
           @token = "Bearer #{@token}"
-
-          if @user.user_type == 'party_place'
-            @party_place = PartyPlace.find_by user_id: @user.id
-          end
 
           return success_session_created
         else
@@ -61,6 +63,6 @@ class Auth::SessionsController < ApplicationController
   end
 
   def unconfirmed_email
-    render status: :created, template: "auth/unconfirmed_user"
+    render status: :created, template: "auth/auth"
   end
 end
