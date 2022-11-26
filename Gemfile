@@ -75,6 +75,7 @@ group :development do
 
   # Framework to add tests
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'rails-erd'
 end
 
 group :test do
