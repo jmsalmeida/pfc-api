@@ -28,7 +28,7 @@ class PartyPlacesController < ApplicationController
 
   def filter_by_party_features
     if params.has_key?(:party_features)
-      @party_place_ids = PartyFeature.tagged_with(params[:party_features], :any => true).pluck(:party_place_id)
+      @party_place_ids = PartyFeature.tagged_with(params[:party_features]).pluck(:party_place_id)
       @party_places = PartyPlace.find(@party_place_ids)
     end
   end
