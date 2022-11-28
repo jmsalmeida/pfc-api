@@ -3,13 +3,12 @@ services:
   cola_aqui_mysql:
     image: mysql:8
     restart: always
-    environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
       - cola_aqui_mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
   cola_aqui_on_rails:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -22,9 +21,9 @@ services:
     links:
       - cola_aqui_mysql
     environment:
-      DB_USER: root
-      DB_PASSWORD: password
-      DB_HOST: cola_aqui_mysql
-      JWT_SECRET: 2e0d0c3fa6ce87007a291ed674d75646091a025931e5ecde8086751f1ccd1837
+      MYSQL_HOST: cola_aqui_mysql
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET_KEY}
 volumes:
   cola_aqui_mysql_data:

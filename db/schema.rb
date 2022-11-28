@@ -23,16 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_013448) do
     t.index ["party_place_id"], name: "index_addresses_on_party_place_id"
   end
 
-  create_table "api_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "bearer_id", null: false
-    t.string "bearer_type", null: false
-    t.string "token_digest", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bearer_id", "bearer_type"], name: "index_api_keys_on_bearer_id_and_bearer_type"
-    t.index ["token_digest"], name: "index_api_keys_on_token_digest", unique: true
-  end
-
   create_table "checkins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "partyer_id"
     t.bigint "party_place_id"
