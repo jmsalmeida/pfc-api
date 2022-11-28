@@ -286,7 +286,6 @@ end
 
 party_places_seed.each do |place|
   ActiveRecord::Base::transaction do
-    puts "#" * 30
     user = User.create!({
       email: "bar_#{SecureRandom.random_number(9999)}@colaaqui.com",
       password: "1234",
@@ -322,13 +321,12 @@ party_places_seed.each do |place|
 
     party_feature.completed = true
     party_feature.food_type_list.add(select_random_features features[:food_type_list])
-    party_feature.drink_type_list.add(select_random_features features[:drink_type_list])
     party_feature.party_type_list.add(select_random_features features[:party_type_list])
     party_feature.music_style_list.add(select_random_features features[:music_style_list])
+    party_feature.drink_type_list.add(select_random_features features[:drink_type_list])
+    party_feature.drink_type_list.add('cervejas') unless party_feature.drink_type_list.include?('cervejas')
     party_feature.save!
     puts "Update party features"
-
-    party_place.save!
 
     party_place.user.email_activate
     puts "Activate user"
