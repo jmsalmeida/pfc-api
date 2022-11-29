@@ -12,7 +12,20 @@
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/compose-plugin/#installing-compose-on-linux-systems)
 
-#### Database setup
+#### Aplication setup
+
+Will be necessary create a file called `.env` with the env variables
+```
+MYSQL_USER=<value>
+MYSQL_PASSWORD=<value>
+JWT_SECRET_KEY=<value>
+```
+
+- Build containers
+
+```docker
+docker compose build
+```
 
 - DB creation
 
@@ -24,6 +37,12 @@ docker exec -it <container_ref> rails db:create
 
 ```docker
 docker exec -it <container_ref> rails db:migrate RAILS_ENV=development
+```
+
+- Run containers
+
+```docker
+docker compose up
 ```
 
 #### Configuration for developers
