@@ -5,6 +5,14 @@ class PartyPlacesController < ApplicationController
     filter_params = [:party_features, :party_place_name]
 
     if filter_params.any? {|key| params.has_key? key}
+      feature_limit = []
+      params[:party_features].split(',').each { |feature| feature_limit << feature }
+
+      if feature_limit.length >= 6
+        render json: { errors: [I18n.t('errors.controllers.party_places.not_found')] }, status: :not_found
+        return
+      end
+
       filter_by_party_features
       search_party_place_by_name
 
