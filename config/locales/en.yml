@@ -14,3 +14,5 @@ en:
         invalid_confirmation_token: 'Código de confirmação inválido! Tente novamente ou re-envie o email de confirmação.'
       party_places:
         not_found: 'Estabelecimentos não encontrados.'
+      checkin:
+        last_visit_lt_min_hours: 'Seu último checkin foi a menos de 3 horas.'
